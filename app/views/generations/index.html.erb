@@ -1,0 +1,26 @@
+<h1>Generaciones</h1>
+
+<%= link_to "Nueva Generación", new_generation_path %>
+<table>
+	<thead>
+		<th>ID</th>
+		<th>Nombre</th>
+		<th>Fecha de Inicio</th>
+		<th>Creado en</th>
+		<th>Actualizado en</th>
+	</thead>
+	<tbody>
+		<% @generations.each do |generation| %>
+			<tr>
+				<td><%= generation.id %></td>
+				<td><%= generation.name %></td>
+				<td><%= generation.start_date.strftime("%d/%B/%Y") %></td>
+				<td><%= generation.created_at.strftime("%d/%B/%Y %H:%M") %></td>
+				<td><%= generation.updated_at.strftime("%d/%B/%Y %H:%M") %></td>
+				<td><%= link_to "Editar", edit_generation_path(generation) %></td>
+				<td><%= link_to "Eliminar", generation_path(generation), method: :delete, data: {confirm: "¿Estás seguro?"} %></td>
+			</tr>
+		<% end %>
+		
+	</tbody>	
+</table>
