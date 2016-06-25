@@ -1,3 +1,3 @@
 class Language < ActiveRecord::Base
-  belongs_to :hacker, though: :hacker_languages
+  belongs_to :hacker
 end
