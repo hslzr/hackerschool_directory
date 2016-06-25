@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reports/general'
+
   resources :courses
   resources :hackers
   resources :generations
