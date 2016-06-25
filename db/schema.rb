@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624020513) do
+ActiveRecord::Schema.define(version: 20160625165450) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -26,26 +26,34 @@ ActiveRecord::Schema.define(version: 20160624020513) do
   create_table "generations", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   create_table "hackers", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.integer  "generation_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "github"
+    t.string   "status",        default: "active"
   end
+
+  create_table "hackers_languages", id: false, force: :cascade do |t|
+    t.integer "hacker_id",   null: false
+    t.integer "language_id", null: false
+  end
+
+  add_index "hackers_languages", ["hacker_id", "language_id"], name: "index_hackers_languages_on_hacker_id_and_language_id"
+  add_index "hackers_languages", ["language_id", "hacker_id"], name: "index_hackers_languages_on_language_id_and_hacker_id"
 
   create_table "languages", force: :cascade do |t|
     t.string   "name"
     t.string   "skill"
-    t.integer  "hacker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "languages", ["hacker_id"], name: "index_languages_on_hacker_id"
 
 end

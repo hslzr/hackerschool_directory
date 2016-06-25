@@ -41,7 +41,6 @@ class HackersController < ApplicationController
   # PATCH/PUT /hackers/1.json
   def update
     respond_to do |format|
-      langs = params[:hacker][:langs].split(',')
 
       if @hacker.update(hacker_params)
         format.html { redirect_to @hacker, notice: 'Hacker was successfully updated.' }
@@ -74,6 +73,6 @@ class HackersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hacker_params
-      params.require(:hacker).permit(:name, :email, :generation_id)
+      params.require(:hacker).permit(:name, :email, :generation_id, language_ids: [])
     end
 end

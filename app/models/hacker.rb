@@ -1,6 +1,19 @@
 class Hacker < ActiveRecord::Base
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true
   belongs_to :generation
-  has_many :languages
+  has_and_belongs_to_many :languages
 
-	accepts_nested_attributes_for :languages
+  before_destroy :verify_if_theres_at_least_one
+
+
+  private
+
+  def verify_if_theres_at_least_one
+    if Hacker.count == 1
+      false
+    else
+      true
+    end
+  end
 end
