@@ -7,6 +7,10 @@ class Hacker < ActiveRecord::Base
   before_destroy :verify_if_theres_at_least_one
 
 
+	def active?
+		status == 'active'
+	end
+
   private
 
   def verify_if_theres_at_least_one

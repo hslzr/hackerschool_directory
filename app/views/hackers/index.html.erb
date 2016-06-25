@@ -13,7 +13,8 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Generation</th>
+			<th>Generation</th>
+			<th>Status</th>
       <th>Languages</th>
       <th colspan="3"></th>
     </tr>
@@ -24,7 +25,8 @@
       <tr>
         <td><%= link_to hacker.name, hacker %></td>
         <td><%= hacker.email %></td>
-        <td><%= hacker.generation.name %></td>
+				<td><%= hacker.generation.name %></td>
+				<td><%= hacker.status.upcase %></td>
         <td><%= hacker.languages.map(&:name).join(", ") %></td>
         <td>
 
@@ -34,7 +36,11 @@
                       hacker_path(hacker),
                       :method => :delete,
                       :data => { confirm: "¿Estás seguro?" },
-                      :class => 'btn btn-xs btn-danger' %>
+											:class => 'btn btn-xs btn-danger' %>
+							<%= link_to "#{ hacker.active? ? 'Deactivate' : 'Activate'}",
+											activate_hacker_path(hacker),
+											method: :put,
+											class: 'btn btn-xs btn-info'	%>
         </td>
       </tr>
     <% end %>

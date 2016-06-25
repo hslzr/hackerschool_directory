@@ -28,7 +28,7 @@ class HackersController < ApplicationController
 
     respond_to do |format|
       if @hacker.save
-        format.html { redirect_to @hacker, notice: 'Hacker was successfully created.' }
+        format.html { redirect_to hackers_path, notice: 'Hacker was successfully created.' }
         format.json { render :show, status: :created, location: @hacker }
       else
         format.html { render :new }
@@ -63,8 +63,9 @@ class HackersController < ApplicationController
   end
 
   def activate
-		@hacker.active = !@hacker.active
+		@hacker.status = @hacker.active? ? 'inactive' : 'active'
 		@hacker.save
+		redirect_to hackers_path, notice: "#{@hacker.name}'s status was changed to #{@hacker.status}"
   end
 
   private
