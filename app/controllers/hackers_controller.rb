@@ -1,5 +1,5 @@
 class HackersController < ApplicationController
-  before_action :set_hacker, only: [:show, :edit, :update, :destroy, :languages]
+  before_action :set_hacker, only: [:show, :edit, :update, :destroy, :activate]
 
   # GET /hackers
   # GET /hackers.json
@@ -62,7 +62,9 @@ class HackersController < ApplicationController
     end
   end
 
-  def languages
+  def activate
+		@hacker.active = !@hacker.active
+		@hacker.save
   end
 
   private
